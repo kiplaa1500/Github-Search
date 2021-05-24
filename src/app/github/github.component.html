@@ -1,7 +1,8 @@
-    <div class="form-group">
+    <div class="form-group container">
       <form class="container">
         <input type="text" name="search" class="search-box" placeholder="Search    GitHub User..."
-          [(ngModel)]="username" name="username" (keypress)="getUserProfile()">
+          [(ngModel)]="username" name="username" style="border-radius: 5cm; margin-top:2cm"
+          (keypress)="getUserProfile()">
       </form>
     </div>
     <div class="container">
@@ -44,7 +45,7 @@
             <p>
               <span class="btn btn-success"> Followers: {{ profile.followers }} </span>
 
-              <!-- <span class="btn btn-info"> Following: {{ profile.following }}</span> -->
+              <span class="btn btn-info"> Following: {{ profile.following }}</span>
 
               <span class="btn btn-primary"> Public-gists: {{ profile.public_gists}}</span>
 
@@ -62,12 +63,24 @@
               <div *ngFor="let repo of repos">
                 <div class="row">
                   <div class="column">
-                    <p>
+                    <!-- <p>
                       {{repo.name}} <a href="{{repo.html_url}}" class="btn btn-danger" target="_blank">View the
                         Repository
                         on
-                        GitHub</a>
-                    </p>
+                        GitHub</a> -->
+                    <div class="card" style="width: 38rem;">
+                      <div class="card-body">
+                        <h5 class="card-title">Github Repo</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <p>
+                          {{repo.name}} <a href="{{repo.html_url}}" class="btn btn-danger" target="_blank">View the
+                            Repository
+                            on
+                            GitHub</a>
+                        </p>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
