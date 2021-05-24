@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { GithubService } from './service/github.service';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     GithubComponent,
     AboutComponent,
     NavbarComponent,
-    NotFoundComponent
   ],
   imports: [
     BrowserModule,
