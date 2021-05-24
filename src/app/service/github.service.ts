@@ -1,9 +1,25 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GithubService {
 
-  constructor() { }
+  private username: string;
+  constructor(private http: HttpClient) {
+    this.username = 'kiplaa1500';
+  }
+  getProfileInformation() {
+    return this.http.get(`https://api.github.com/users/${this.username}?}`)
+  }
+  getProfileRepos() {
+    return this.http.get(`https://api.github.com/users/${this.username}/repos?}`)
+  }
+  updateUserProfile(username: string) {
+    this.username = username;
+  }
 }
