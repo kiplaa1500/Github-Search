@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { GithubService } from './service/github.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { GetPipe } from './get.pipe';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     GithubComponent,
     AboutComponent,
     NavbarComponent,
+    GetPipe,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

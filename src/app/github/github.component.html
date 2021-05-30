@@ -1,90 +1,24 @@
-    <div class="form-group container">
-      <form class="container">
-        <input type="text" name="search" class="search-box" placeholder="Search    GitHub User..."
-          [(ngModel)]="username" name="username" style="border-radius: 5cm; margin-top:2cm"
-          (keypress)="getUserProfile()">
-          <p id="para">Enter prefered search account and hit enter.</p>
-      </form>
+<app-search (emitSearch)="searchGit($event)"></app-search><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img id="avatar" src="{{Users.avatar_url}}" alt="profile pic" height="250px" width="250px">
+      <p>Username: {{Users.login}}</p>
+      <p>Followers: {{Users.followers}}</p>
+      <p>Following: {{Users.followers}}</p>
+      <p>Public Repositories: {{Users.public_repos}}</p>
+      <p>Location: {{Users.location}}</p>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="user-profile">
-            <div *ngIf="profile">
-              <div class="row">
-                <div class="col-sm-5"><br>
-                  <img src="{{profile.avatar_url}}" class="Profile_picture" alt="img1">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <h2>Name: {{profile.name}}</h2> ({{profile.login}})
-            <h2> <span *ngIf="profile.company">Company: {{profile.company}}</span></h2>
-            <h2>Location: {{profile.location}} </h2>
-
-            <div class="list">
-              <ul>
-                <li class="list-group-item list-group-item-success" *ngIf="profile.bio">Bio: {{profile.bio}}</li>
-                <li class="list-group-item list-group-item-success" *ngIf="profile.hireable">Available for hire:
-                  {{profile.hireable}}</li>
-                <li class="list-group-item list-group-item-success" *ngIf="profile.twitter_username">Twitter🔵 : <a
-                    href="{{profile.twitter_username}}">{{profile.twitter_username}}</a></li>
-                <li class="list-group-item list-group-item-success" *ngIf="profile.blog"><a
-                    href="{{profile.blog}}">{{profile.blog}}</a></li>
-                <li class="list-group-item list-group-item-success" *ngIf="profile.email"><a
-                    href="{{profile.email}}">{{profile.email}}</a></li>
-              </ul>
-            </div>
+    <div class="col-md-6">
+      <div class="card" style="width: 40rem">
+        <div *ngIf='Repos'>
+          <div *ngFor='let repo of Repos'>
+            <h3>{{repo.name}}</h3>
+            <p> {{repo.description}} </p>
+            <p> Created {{repo.created_at | get}} on {{repo.created_at | date}}</p>
           </div>
         </div>
-        <br>
-
-        <div class="col-md-6">
-          <div>
-            <br><br>
-            <p>
-              <span class="btn btn-success"> Followers: {{ profile.followers }} </span>
-
-              <span class="btn btn-info"> Following: {{ profile.following }}</span>
-
-              <span class="btn btn-primary"> Public-gists: {{ profile.public_gists}}</span>
-
-              <span class="btn btn-danger"> Repositories: {{ profile.public_repos }}</span>
-            </p>
-            <div>
-              <p><a href="{{profile.html_url}}" target="_blank"><button class="btn btn-primary"> View Profile on
-                    GitHub</button>
-                </a></p>
-
-              <div class="heading">
-                <h4><b>Repositories</b></h4>
-              </div>
-              <br>
-              <div *ngFor="let repo of repos">
-                <div class="row">
-                  <div class="column">
-                    <!-- <p>
-                      {{repo.name}} <a href="{{repo.html_url}}" class="btn btn-danger" target="_blank">View the
-                        Repository
-                        on
-                        GitHub</a> -->
-                    <div class="card" style="width: 38rem;">
-                      <div class="card-body">
-                        <h5 class="card-title">Github Repo</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
-                        <p>
-                          {{repo.name}} <a href="{{repo.html_url}}" class="btn btn-danger" target="_blank">View the
-                            Repository
-                            on
-                            GitHub</a>
-                        </p>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
+</div>

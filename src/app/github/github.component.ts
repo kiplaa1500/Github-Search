@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubService } from '../service/github.service';
+import { User } from '../user'
+import {Repo} from '../repos'
 
 @Component({
   selector: 'app-github',
@@ -8,36 +10,24 @@ import { GithubService } from '../service/github.service';
 })
 export class GithubComponent implements OnInit {
 
-  profile: any;
-  repos: any;
-  username!: string;
-
-  constructor(private githubService: GithubService) {
-    this.githubService.updateUserProfile(this.username);
-    this.githubService.getProfileInformation().subscribe(profile => {
-      this.profile = profile;
-    });
-
-    this.githubService.getProfileRepos().subscribe(repos => {
-      this.repos = repos;
-    });
-
-  }
-  getUserProfile() {
-    this.githubService.updateUserProfile(this.username);
-    this.githubService.getProfileInformation().subscribe(profile => {
-      this.profile = profile;
-    });
-
-    this.githubService.getProfileRepos().subscribe(repos => {
-      this.repos = repos;
-    });
-  }
+  Users!: User;
+  Repos: Repo[] = [];
+  constructor(public userHttpService: GithubService) { }
 
   ngOnInit() {
-    this.githubService.updateUserProfile('kiplaa1500');
-    this.githubService.getProfileInformation().subscribe(profile => this.profile = profile);
-    // this.githubService.getProfileRepos().subscribe(repos =>  this.repos = repos);
-
+    this.searchGit('kiplaa1500');
+  }
+  searchGit(searchTerm: string) {
+    this.userHttpService.searchGits(searchTerm).then(
+      (success) => {
+        this.Users = this.userHttpService.Users;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.userHttpService.searchRepos(searchTerm).then((success) => {
+      this.Repos = this.userHttpService.Repos;
+    });
   }
 }
